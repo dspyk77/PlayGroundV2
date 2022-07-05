@@ -48,5 +48,44 @@ namespace PlayGroundV2.Controllers
 
             return View(viewModel);
         }
+
+        public IActionResult Edit(int id)
+        {
+            var taskManager = new TaskManager(_playGroundContext);
+            var task = taskManager.FindById(id);
+            if (task == null)
+            {
+                return NotFound();
+            }
+
+            var viewModel = new TaskEditViewModel();
+            viewModel.Id = id;
+            viewModel.Name = task.Name;
+            viewModel.Description = task.Description;
+            viewModel.DueDate = task.DueDate;
+            viewModel.IsActive = task.IsActive;
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(TaskEditViewModel viewModel)
+        {
+            var taskManager = new TaskManager(_playGroundContext);
+
+            var task = taskManager.Update(
+                viewModel.Id,
+                viewModel.Name,
+                viewModel.Description,
+                viewModel.DueDate,
+                viewModel.IsActive);
+
+            if (task == null)
+            {
+                //return error message
+            }
+
+            return View(viewModel);
+        }
     }
 }

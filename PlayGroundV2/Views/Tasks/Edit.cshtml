@@ -1,0 +1,38 @@
+﻿
+@model PlayGroundV2.Web.Models.Tasks.TaskEditViewModel
+
+<form asp-action="Edit" asp-controller="Tasks">
+    @Html.HiddenFor(m => m.Id)
+
+    <h1>Create the task, idiot.</h1>
+    <div> 
+        <label>
+            Task Name
+            @Html.TextBoxFor(m => m.Name)
+        </label>
+
+    </div>
+    <div>
+        <label>
+            Description
+            @Html.TextBoxFor(m => m.Description)
+        </label>
+
+    </div>
+    <div>
+        <label>
+            Due Date
+            @Html.TextBoxFor(m => m.DueDate)
+        </label>
+
+    </div>
+    <div>
+        <label>
+            @Html.CheckBoxFor(m => m.IsActive)
+            Is active?
+        </label>
+    </div>
+    <button class="btn btn-primary">
+        Submit
+    </button>
+</form>
