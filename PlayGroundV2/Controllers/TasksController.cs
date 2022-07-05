@@ -18,11 +18,24 @@ namespace PlayGroundV2.Controllers
             _logger = logger;
             _playGroundContext = playGroundContext;
         }
-
+        
         public IActionResult Index()
         {
-            return View();
+            var taskManager = new TaskManager(_playGroundContext);
+
+            var tasks = taskManager.FindAll();
+
+            var viewModel = new TaskIndexViewModel();
+
+            viewModel.Tasks = tasks.Select(x => new TaskViewModel
+            {
+                Name = x.Name,
+                Description = x.Description
+            }).ToList();
+
+            return View(viewModel);
         }
+        
 
         [HttpGet]
         public IActionResult Create()
@@ -43,6 +56,7 @@ namespace PlayGroundV2.Controllers
 
             if (task == null)
             {
+                return View("Error");
                 //return error message
             }
 
@@ -82,10 +96,14 @@ namespace PlayGroundV2.Controllers
 
             if (task == null)
             {
+                return BadRequest();
                 //return error message
             }
 
             return View(viewModel);
         }
+
+       
+        
     }
 }

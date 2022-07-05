@@ -18,7 +18,7 @@ namespace PlayGroundV2.Shared.Tasks
         }
 
 
-        public Task? FindById(int id) 
+        public Task? FindById(int id)
         {
             return _playGroundContext.Tasks.FirstOrDefault(x => x.Id == id);
         }
@@ -35,11 +35,11 @@ namespace PlayGroundV2.Shared.Tasks
             task.DueDate = dueDate;
             task.IsActive = isActive;
 
-        
+
             _playGroundContext.Tasks.Add(task);
-            
+
             _playGroundContext.SaveChanges();
-            
+
             return task;
         }
 
@@ -57,9 +57,9 @@ namespace PlayGroundV2.Shared.Tasks
             }
 
             task.Name = name;
-            task.Description= description;
-            task.DueDate= dueDate;
-            task.IsActive= isActive;
+            task.Description = description;
+            task.DueDate = dueDate;
+            task.IsActive = isActive;
 
             _playGroundContext.Tasks.Update(task);
 
@@ -67,5 +67,13 @@ namespace PlayGroundV2.Shared.Tasks
 
             return task;
         }
+        public List <Task> FindAll()
+        {
+            return _playGroundContext.Tasks.OrderByDescending(x => x.Id).ToList();
+        }
+       
+        
+        
+
     }
 }

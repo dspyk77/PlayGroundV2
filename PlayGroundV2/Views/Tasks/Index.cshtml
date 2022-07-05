@@ -1,6 +1,8 @@
-﻿namespace PlayGroundV2.Web.Views.Tasks
-{
-    public class Index
-    {
-    }
+﻿
+@model PlayGroundV2.Web.Models.Tasks.TaskIndexViewModel
+
+
+
+@foreach(var task in Model.Tasks) {
+    <div>@task.Name;</div>
 }
