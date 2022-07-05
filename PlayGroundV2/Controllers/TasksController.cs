@@ -30,7 +30,8 @@ namespace PlayGroundV2.Controllers
             viewModel.Tasks = tasks.Select(x => new TaskViewModel
             {
                 Name = x.Name,
-                Description = x.Description
+                Description = x.Description,
+                Id = x.Id
             }).ToList();
 
             return View(viewModel);
@@ -60,7 +61,7 @@ namespace PlayGroundV2.Controllers
                 //return error message
             }
 
-            return View(viewModel);
+            return RedirectToAction("Index");
         }
 
         public IActionResult Edit(int id)
@@ -100,7 +101,7 @@ namespace PlayGroundV2.Controllers
                 //return error message
             }
 
-            return View(viewModel);
+            return RedirectToAction("Index");
         }
 
        
